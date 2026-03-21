@@ -6,3 +6,5 @@ pyngrok
 python-dotenv
 requests
 pyTelegramBotAPI
+fastapi
+uvicron
