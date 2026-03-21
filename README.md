@@ -1,7 +1,9 @@
 # Discode
 
 A Discord bot that generates beautiful, standalone HTML pages and mini web apps from natural language — and hosts them instantly with a public URL.
+[Try here](https://discord.gg/mznphrc3)
 
+![Discode](https://cdn.discordapp.com/attachments/1484135354541019277/1484135691746152610/Gemini_Generated_Image_gbyl02gbyl02gbyl.png?ex=69bd2092&is=69bbcf12&hm=3c9682903cbe567c7929da88e71b3127fcc7eb4d7f687b6713f586ffc01b2f39&)
 
 ## How It Works
 
@@ -18,7 +20,7 @@ Bot returns public URL to user
 ```
 
 1. User sends a message like *"make me a snake game"* in Discord
-2. The Agno agent interprets the request and generates a complete, self-contained HTML page
+2. The agent interprets the request and generates a complete, self-contained HTML page
 3. The `save_and_host` tool saves the file to `generated_sites/`, spins up a local HTTP server, and creates a public ngrok tunnel
 4. The bot replies with a clickable public URL
 
@@ -89,3 +91,8 @@ discode/
 - **[discord.py](https://discordpy.readthedocs.io)** — Discord API wrapper
 - **[pyngrok](https://github.com/alexdlaird/pyngrok)** — Public URL tunneling
 - **SQLite** — Conversation history persistence
+
+
+This is currently a WIP for future development, no more stuff would be posted in this repo anymore a better more complete version is yet to come at https://github.com/virusdumb no more development to be done in this repo
+
+![Discode](https://cdn.discordapp.com/attachments/1484135354541019277/1484135692903911495/Gemini_Generated_Image_8oooxz8oooxz8ooo.png?ex=69bd2093&is=69bbcf13&hm=26e34eb66c1d64bb0d809b18a1f892eed7dbbd81dc581584d827b3c7e70205e9&)
