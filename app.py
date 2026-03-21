@@ -6,8 +6,9 @@ load_dotenv()
 
 from agno.agent import Agent
 from agno.db.sqlite import SqliteDb
-from agno.integrations.discord import DiscordClient
 from agno.models.ollama import Ollama
+from agno.os import AgentOS
+from agno.os.interfaces.telegram import Telegram
 
 from tools.html_host import HtmlHostToolkit
 
@@ -31,16 +32,21 @@ Always return the link to the user recieved from the tool after creating
 
 agent = Agent(
     name="Discode",
-    model=Ollama(id="kimi-k2.5:cloud"),
+    model=Ollama(id="minimax-m2.7:cloud"),
     debug_mode=True,
     db=SqliteDb(db_file="discode.db"),
     tools=[HtmlHostToolkit()],
     instructions=SYSTEM_PROMPT,
     add_history_to_context=True,
+    num_history_runs=3,
     markdown=True,
 )
 
-discord_bot = DiscordClient(agent)
+agent_os = AgentOS(
+    agents=[agent],
+    interfaces=[Telegram(agent=agent)],
+)
+app = agent_os.get_app()
 
 if __name__ == "__main__":
-    discord_bot.serve()
+    agent_os.serve(app="app:app", port=7777, reload=True)

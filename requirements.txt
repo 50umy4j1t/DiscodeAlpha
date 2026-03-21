@@ -1,8 +1,8 @@
 agno
 ollama
 openai
-discord.py
 sqlalchemy
 pyngrok
 python-dotenv
 requests
+pyTelegramBotAPI
