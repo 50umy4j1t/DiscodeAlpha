@@ -49,4 +49,5 @@ agent_os = AgentOS(
 app = agent_os.get_app()
 
 if __name__ == "__main__":
-    agent_os.serve(app="app:app", port=7777, reload=True)
+    port = int(os.environ.get("PORT", 7777))
+    agent_os.serve(app="app:app", port=port, reload=False)
