@@ -8,3 +8,4 @@ requests
 pyTelegramBotAPI
 fastapi
 uvicorn
+discord.py
