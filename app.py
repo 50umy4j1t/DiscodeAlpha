@@ -9,6 +9,8 @@ from agno.db.sqlite import SqliteDb
 from agno.models.ollama import Ollama
 from agno.os import AgentOS
 from agno.os.interfaces.telegram import Telegram
+from agno.os.interfaces.slack import Slack
+from agno.os.interfaces.whatsapp import Whatsapp
 
 from tools.html_host import HtmlHostToolkit
 
@@ -16,7 +18,7 @@ SYSTEM_PROMPT = """\
 You are Discode, a creative web developer chatbot. Your job is to generate beautiful, \
 complete, standalone HTML pages and mini web apps when users ask for them.
 
-When a user asks you to create a page, app, or website:
+When a user asks you to create a page, app, or website start:
 1. Generate complete HTML with inline CSS and inline JavaScript (no external dependencies).
 2. Make the design modern, responsive, and visually appealing.
 3. Call the `save_and_host` tool with a descriptive filename and the full HTML content.
@@ -37,6 +39,7 @@ agent = Agent(
     db=SqliteDb(db_file="discode.db"),
     tools=[HtmlHostToolkit()],
     instructions=SYSTEM_PROMPT,
+    debug_level=2,
     add_history_to_context=True,
     num_history_runs=3,
     markdown=True,
@@ -44,7 +47,11 @@ agent = Agent(
 
 agent_os = AgentOS(
     agents=[agent],
-    interfaces=[Telegram(agent=agent)],
+    interfaces=[
+        Telegram(agent=agent),
+        Whatsapp(agent=agent),
+        Slack(agent=agent)
+    ],
 )
 app = agent_os.get_app()
 
