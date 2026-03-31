@@ -7,10 +7,7 @@ load_dotenv()
 from agno.agent import Agent
 from agno.db.sqlite import SqliteDb
 from agno.models.ollama import Ollama
-from agno.os import AgentOS
-from agno.os.interfaces.telegram import Telegram
-from agno.os.interfaces.slack import Slack
-from agno.os.interfaces.whatsapp import Whatsapp
+from agno.integrations.discord import DiscordClient
 
 from tools.html_host import HtmlHostToolkit
 
@@ -45,16 +42,7 @@ agent = Agent(
     markdown=True,
 )
 
-agent_os = AgentOS(
-    agents=[agent],
-    interfaces=[
-        Telegram(agent=agent),
-        Whatsapp(agent=agent),
-        Slack(agent=agent)
-    ],
-)
-app = agent_os.get_app()
+discord_bot = DiscordClient(agent)
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 7777))
-    agent_os.serve(app="app:app", port=port, reload=False)
+    discord_bot.serve()
