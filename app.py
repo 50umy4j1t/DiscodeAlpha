@@ -11,9 +11,13 @@ from agno.os import AgentOS
 from agno.os.interfaces.telegram import Telegram
 from agno.os.interfaces.slack import Slack
 from agno.os.interfaces.whatsapp import Whatsapp
+from agno.models.google import Gemini
+from agno.models.anthropic import Claude
 
 from tools.html_host import HtmlHostToolkit
-
+g=Gemini(id="gemini-flash-latest")
+o=Ollama(id="minimax-m2.7:cloud")
+c=Claude(id="claude-sonnet-4-6")
 SYSTEM_PROMPT = """\
 You are Discode, a creative web developer chatbot. Your job is to generate beautiful, \
 complete, standalone HTML pages and mini web apps when users ask for them.
@@ -34,7 +38,7 @@ Always return the link to the user recieved from the tool after creating
 
 agent = Agent(
     name="Discode",
-    model=Ollama(id="minimax-m2.7:cloud"),
+    model=g,
     debug_mode=True,
     db=SqliteDb(db_file="discode.db"),
     tools=[HtmlHostToolkit()],
